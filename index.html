@@ -48,20 +48,26 @@
 <pre style="font-size: 10px;">
 
 &lt;!-- Put buttons anywhere in your layout -->
+
 &lt;p>
-    &lt;span id="donate-bitcoin" class="donate-btn">&lt;/span>
-    &lt;span id="donate-dogecoin" class="donate-btn">&lt;/span>
+  &lt;span id="donate-bitcoin" class="donate-btn">&lt;/span>
+  &lt;span id="donate-dogecoin" class="donate-btn">&lt;/span>
 &lt;/p>
 
 &lt;!-- Include scripts before closing &lt;body> tag -->
+
 &lt;script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js">&lt;/script>
 &lt;script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.1.0/bootstrap-modal.pack.js">&lt;/script>
-&lt;script src="assets/js/cointipper.js">&lt;/script>
+&lt;script src="PATH/TO/cointipper.js">&lt;/script>
 
-$(function() {
-    dogecoinDonateButton('CoinTipper', 'DNuK9cSYUgM5YgyFfKThg8UbVLQS1DWvSS', 'CoinTipper Tip Jar');
-    bitcoinDonateButton('CoinTipper', '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5', 'CoinTipper Tip Jar');
-});
+&lt;script>
+
+  $(function() {
+      dogecoinDonateButton('CoinTipper', 'DNuK9cSYUgM5YgyFfKThg8UbVLQS1DWvSS', 'CoinTipper Tip Jar');
+      bitcoinDonateButton('CoinTipper', '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5', 'CoinTipper Tip Jar');
+  });
+
+&lt;/script>
 </pre>
 				</p>
 
