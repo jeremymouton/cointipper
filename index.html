@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>CoinTipper</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet" href="assets/css/cointipper.css">
+</head>
+<body>
+	<div class="container main">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="page-header" style="text-align: center;">
+					<h1>CoinTipper <small>v0.1</small></h1>
+				</div>
+				
+				<p style="text-align: center;">
+					<span id="donate-bitcoin" class="donate-btn"></span>
+					<span id="donate-dogecoin" class="donate-btn"></span>
+				</p>
+
+				<hr>
+
+				<h2>Setup</h2>
+				<p>Include <code><a href="assets/js/cointipper.js">cointipper.js</a></code> along with <a href="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js">jQuery</a>, <a href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.1.0/bootstrap-modal.pack.js">Bootstrap Modal</a>, and <a href="assets/css/cointipper.css">stylesheet</a>.</p>
+				<hr>
+				<p>
+					For a Bitcoin donate button: <br>
+					<code>
+						bitcoinDonateButton('NAME', 'ADDRESS', 'LABEL');
+					</code>
+				</p>
+				<p>
+					For a Dogecoin donate button: <br>
+					<code>
+						dogecoinDonateButton('NAME', 'ADDRESS', 'LABEL');
+					</code>
+				</p>
+				<p>
+					Example: <br>
+<pre style="font-size: 10px;">
+
+&lt;!-- Put buttons anywhere in your layout -->
+&lt;p>
+    &lt;span id="donate-bitcoin" class="donate-btn">&lt;/span>
+    &lt;span id="donate-dogecoin" class="donate-btn">&lt;/span>
+&lt;/p>
+
+&lt;!-- Include scripts before closing &lt;body> tag -->
+&lt;script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js">&lt;/script>
+&lt;script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.1.0/bootstrap-modal.pack.js">&lt;/script>
+&lt;script src="assets/js/cointipper.js">&lt;/script>
+
+$(function() {
+    dogecoinDonateButton('CoinTipper', 'DNuK9cSYUgM5YgyFfKThg8UbVLQS1DWvSS', 'CoinTipper Tip Jar');
+    bitcoinDonateButton('CoinTipper', '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5', 'CoinTipper Tip Jar');
+});
+</pre>
+				</p>
+
+				<p>
+					<small>Depends on <a href="https://github.com/jeromeetienne/jquery-qrcode/">jquery-qrcode by Jerome Etienne</a>.</small>
+				</p>
+
+				<div class="footer">
+					<p>CoinTipper by <a href="http://twitter.com/jeremymouton">@jeremymouton</a></p>
+				</div>
+			</div>
+		</div>
+	</div><!-- /main -->
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.1.0/bootstrap-modal.pack.js"></script>
+	<script src="assets/js/cointipper.js"></script>
+
+	<script>
+		$(function() {
+			dogecoinDonateButton('CoinTipper', 'DNuK9cSYUgM5YgyFfKThg8UbVLQS1DWvSS', 'CoinTipper Tip Jar');
+			bitcoinDonateButton('CoinTipper', '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5', 'CoinTipper Tip Jar');
+		});
+	</script>
+</body>
+</html>
