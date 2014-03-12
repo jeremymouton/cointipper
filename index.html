@@ -19,7 +19,10 @@
 			<div class="col-md-8 col-md-offset-2">
 				<div class="page-header" style="text-align: center;">
 					<h1>CoinTipper <small>v0.1</small></h1>
-				</div>
+					<small><a href="https://github.com/jeremymouton/cointipper">View on Github</a></small>
+				</div>				
+
+				<hr>
 				
 				<p style="text-align: center;">
 					<span id="donate-bitcoin" class="donate-btn"></span>
@@ -29,32 +32,37 @@
 				<hr>
 
 				<h2>Setup</h2>
-				<p>Include <code><a href="assets/js/cointipper.js">cointipper.js</a></code> along with <a href="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js">jQuery</a>, <a href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.1.0/bootstrap-modal.pack.js">Bootstrap Modal</a>, and <a href="assets/css/cointipper.css">stylesheet</a>.</p>
+				<p>Include <code><a href="assets/js/cointipper.js">cointipper.js</a></code> along with <a href="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js">jQuery</a>, <a href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.1.0/bootstrap-modal.pack.js">Bootstrap Modal</a>, and <a href="assets/css/cointipper.css">the stylesheet</a>.</p>
 				<hr>
 				<p>
-					For a Bitcoin donate button: <br>
+					To spawn a Bitcoin donate link: <br>
 					<code>
 						bitcoinDonateButton('NAME', 'ADDRESS', 'LABEL');
 					</code>
 				</p>
 				<p>
-					For a Dogecoin donate button: <br>
+					To spawn a Dogecoin donate link: <br>
 					<code>
 						dogecoinDonateButton('NAME', 'ADDRESS', 'LABEL');
 					</code>
 				</p>
+				<hr>
 				<p>
-					Example: <br>
+					Sample: <br>
 <pre style="font-size: 10px;">
+
+&lt;!-- Include stylesheet in the &lt;head> tag -->
+
+&lt;link rel="stylesheet" href="PATH/TO/cointipper.css">
 
 &lt;!-- Put buttons anywhere in your layout -->
 
 &lt;p>
-  &lt;span id="donate-bitcoin" class="donate-btn">&lt;/span>
-  &lt;span id="donate-dogecoin" class="donate-btn">&lt;/span>
+  &lt;span id="donate-bitcoin">&lt;/span>
+  &lt;span id="donate-dogecoin">&lt;/span>
 &lt;/p>
 
-&lt;!-- Include scripts before closing &lt;body> tag -->
+&lt;!-- Include scripts before the closing &lt;body> tag -->
 
 &lt;script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js">&lt;/script>
 &lt;script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.1.0/bootstrap-modal.pack.js">&lt;/script>
@@ -76,7 +84,7 @@
 				</p>
 
 				<div class="footer">
-					<p>CoinTipper by <a href="http://twitter.com/jeremymouton">@jeremymouton</a></p>
+					<p>CoinTipper by <a href="https://github.com/jeremymouton">@jeremymouton</a></p>
 				</div>
 			</div>
 		</div>
