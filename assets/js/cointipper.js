@@ -1,5 +1,5 @@
 // ======================
-// CoinTipper styles
+// CoinTipper jQuery plugin
 // 
 // Jeremy Mouton (@jeremymouton)
 // https://github.com/jeremymouton/
@@ -18,7 +18,7 @@
 			type: null,
 			name: null,
 			address: null,
-			label: 'saffsa'
+			label: null
 		}, options );
  		
  		button = generateDonationButton(options, this);
@@ -97,7 +97,6 @@ function generateDonationPayment(currency, address, amount, label, uri_key, iso)
 
 function buildDonateButtonHtml(currency, currency_name) {
 	// Build out the donation button
-
 	var html = '<a href="" data-toggle="modal" data-target="#'+currency+'-donation-overlay" class="donate-btn '+currency+'">Donate '+currency_name+'</a>';
 	return html;
 }
