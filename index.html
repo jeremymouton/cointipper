@@ -20,10 +20,8 @@
 				<div class="page-header" style="text-align: center;">
 					<h1>CoinTipper <small>v0.1</small></h1>
 					<small><a href="https://github.com/jeremymouton/cointipper">View on Github</a></small>
-				</div>				
+				</div>
 
-				<hr>
-				
 				<p style="text-align: center;">
 					<span id="donate-bitcoin" class="donate-btn"></span>
 					<span id="donate-dogecoin" class="donate-btn"></span>
@@ -32,56 +30,35 @@
 				<hr>
 
 				<h2>Setup</h2>
-				<p>Include <code><a href="assets/js/cointipper.js">cointipper.js</a></code> along with <a href="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js">jQuery</a>, <a href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.1.0/bootstrap-modal.pack.js">Bootstrap Modal</a>, and <a href="assets/css/cointipper.css">the stylesheet</a>.</p>
+				<p>Include <code><a href="http://jquery.com/download/">jQuery</a></code> and <code><a href="https://raw.github.com/jeremymouton/cointipper/master/dist/cointipper.js">cointipper.js</a></code> before the closing <code>&lt;/body></code> tag.</p>
+
+				<p>Include <code><a href="https://raw.github.com/jeremymouton/cointipper/master/dist/cointipper.css">cointipper.css</a></code> inside the <code>&lt;head></code> tag.</p>
+
 				<hr>
-				<p>
-					To spawn a Bitcoin donate link: <br>
-					<code>
-						bitcoinDonateButton('NAME', 'ADDRESS', 'LABEL');
-					</code>
-				</p>
-				<p>
-					To spawn a Dogecoin donate link: <br>
-					<code>
-						dogecoinDonateButton('NAME', 'ADDRESS', 'LABEL');
-					</code>
-				</p>
+
+				<p>Create an HTML tag for the button:</p>
+<pre>
+&lt;span id="donate-bitcoin">&lt;/span>
+</pre>
+
 				<hr>
-				<p>
-					Sample: <br>
-<pre style="font-size: 10px;">
 
-&lt;!-- Include stylesheet in the &lt;head> tag -->
-
-&lt;link rel="stylesheet" href="PATH/TO/cointipper.css">
-
-&lt;!-- Put buttons anywhere in your layout -->
-
-&lt;p>
-  &lt;span id="donate-bitcoin">&lt;/span>
-  &lt;span id="donate-dogecoin">&lt;/span>
-&lt;/p>
-
-&lt;!-- Include scripts before the closing &lt;body> tag -->
-
-&lt;script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js">&lt;/script>
-&lt;script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.1.0/bootstrap-modal.pack.js">&lt;/script>
-&lt;script src="PATH/TO/cointipper.js">&lt;/script>
-
+				<p>Select your target (<code>#donate-bitcoin</code> in the previous example), call <code>.coinTipper()</code> and pass in your options.</p>
+<pre>
 &lt;script>
-
-  $(function() {
-      dogecoinDonateButton('CoinTipper', 'DNuK9cSYUgM5YgyFfKThg8UbVLQS1DWvSS', 'CoinTipper Tip Jar');
-      bitcoinDonateButton('CoinTipper', '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5', 'CoinTipper Tip Jar');
-  });
-
+    $('#donate-bitcoin').coinTipper({
+        type:    'btc',                    // required: btc, doge
+        name:    'Name',                   // required
+        address: 'Your Donation Address',  // required
+        label:   'A label for the Address' // optional
+    });
 &lt;/script>
 </pre>
 				</p>
 
-				<p>
-					<small>Depends on <a href="https://github.com/jeromeetienne/jquery-qrcode/">jquery-qrcode by Jerome Etienne</a>.</small>
-				</p>
+				<hr>
+
+				<p>Currently supports <strong>BTC</strong> and <strong>DOGE</strong> addresses.</p>
 
 				<div class="footer">
 					<p>CoinTipper by <a href="https://github.com/jeremymouton">@jeremymouton</a></p>
@@ -91,13 +68,21 @@
 	</div><!-- /main -->
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.1.0/bootstrap-modal.pack.js"></script>
 	<script src="assets/js/cointipper.js"></script>
 
 	<script>
-		$(function() {
-			dogecoinDonateButton('CoinTipper', 'DNuK9cSYUgM5YgyFfKThg8UbVLQS1DWvSS', 'CoinTipper Tip Jar');
-			bitcoinDonateButton('CoinTipper', '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5', 'CoinTipper Tip Jar');
+		$('#donate-bitcoin').coinTipper({
+			type: 'btc', // btc, doge
+			name: 'CoinTipper',
+			address: '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5',
+			label: 'CoinTipper Tip Jar'
+		});
+
+		$('#donate-dogecoin').coinTipper({
+			type: 'doge', // btc, doge
+			name: 'CoinTipper',
+			address: 'DAxYkK3nGQPasscKYmbMswQJoV3h8y4aEW',
+			label: 'CoinTipper Tip Jar'
 		});
 	</script>
 </body>
