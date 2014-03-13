@@ -740,8 +740,36 @@ a.donate-btn {
   position: relative;
   top: -2px;
 }
+@media (max-width: 767px) {
+  [id*='-donation-overlay'] table.donation-options td {
+    text-align: center;
+  }
+  [id*='-donation-overlay'] table.donation-options td:first-child {
+    display: none;
+  }
+  [id*='-donation-overlay'] table.donation-options td label {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    display: block;
+  }
+  [id*='-donation-overlay'] table.donation-options td input[type=radio] {
+    display: none;
+    width: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+}
 [id*='-donation-overlay'] table.donation-payment tr {
   height: 195px;
+}
+@media (max-width: 767px) {
+  [id*='-donation-overlay'] table.donation-payment td {
+    width: 100%;
+    text-align: center;
+    float: left;
+  }
 }
 [id*='-donation-overlay'] table.donation-payment .well {
   background: #000;
