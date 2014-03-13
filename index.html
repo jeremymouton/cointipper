@@ -46,11 +46,13 @@
 				<p>Select your target (<code>#donate-bitcoin</code> in the previous example), call <code>.coinTipper()</code> and pass in your options.</p>
 <pre>
 &lt;script>
-    $('#donate-bitcoin').coinTipper({
-        type:    'btc',                    // required: btc, doge
-        name:    'Name',                   // required
-        address: 'Your Donation Address',  // required
-        label:   'A label for the Address' // optional
+    $(function() {
+        $('#donate-bitcoin').coinTipper({
+            type:    'btc',                    // required: btc, doge
+            name:    'Name',                   // required
+            address: 'Your Donation Address',  // required
+            label:   'A label for the Address' // optional
+        });
     });
 &lt;/script>
 </pre>
@@ -71,18 +73,20 @@
 	<script src="assets/js/cointipper.js"></script>
 
 	<script>
-		$('#donate-bitcoin').coinTipper({
-			type: 'btc', // btc, doge
-			name: 'CoinTipper',
-			address: '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5',
-			label: 'CoinTipper Tip Jar'
-		});
+		$(function() {
+			$('#donate-bitcoin').coinTipper({
+				type: 'btc', // btc, doge
+				name: 'CoinTipper',
+				address: '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5',
+				label: 'CoinTipper Tip Jar'
+			});
 
-		$('#donate-dogecoin').coinTipper({
-			type: 'doge', // btc, doge
-			name: 'CoinTipper',
-			address: 'DAxYkK3nGQPasscKYmbMswQJoV3h8y4aEW',
-			label: 'CoinTipper Tip Jar'
+			$('#donate-dogecoin').coinTipper({
+				type: 'doge', // btc, doge
+				name: 'CoinTipper',
+				address: 'DAxYkK3nGQPasscKYmbMswQJoV3h8y4aEW',
+				label: 'CoinTipper Tip Jar'
+			});
 		});
 	</script>
 </body>
