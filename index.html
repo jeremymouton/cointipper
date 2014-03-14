@@ -11,20 +11,21 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/styles.css">
-	<link rel="stylesheet" href="https://rawgithub.com/jeremymouton/cointipper/master/dist/cointipper.css">
+	<link rel="stylesheet" href="assets/css/cointipper.css">
 </head>
 <body>
 	<div class="container main">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<div class="page-header" style="text-align: center;">
-					<h1>CoinTipper <br><small>a jQuery donate button plugin</small></h1>
+					<h1>jQuery.CoinTipper(); <br><small>a jQuery donate button</small></h1>
 					<small><a href="https://github.com/jeremymouton/cointipper">View on Github</a></small>
 				</div>
 
 				<p style="text-align: center;">
 					<span id="donate-bitcoin" class="donate-btn"></span>
 					<span id="donate-dogecoin" class="donate-btn"></span>
+					<span id="donate-kittehcoin" class="donate-btn"></span>
 				</p>
 
 				<hr>
@@ -48,9 +49,9 @@
 &lt;script>
     $(function() {
         $('#donate-bitcoin').coinTipper({
-            type:    'btc',                    // required: btc, doge
-            name:    'Name',                   // required
-            address: 'Your Donation Address',  // required
+            type:    'btc', // btc, doge, meow
+            name:    'Name', // i.e CoinTipper
+            address: 'Your Donation Address',
             label:   'A label for the Address' // optional
         });
     });
@@ -60,7 +61,13 @@
 
 				<hr>
 
-				<p>Currently supports <strong>BTC</strong> and <strong>DOGE</strong> addresses.</p>
+				<p>Currently supports <strong>BTC</strong>, <strong>DOGE</strong> and <strong><a href="https://github.com/jeremymouton/now-to-meow">MEOW</a></strong> addresses.</p>
+
+				<hr>
+
+				<h3>Log</h3>
+				<p><strong>March 13, 2014</strong><br> Added MEOW support, edited modal text, linked QR code.</p>
+				<p><strong>March 12, 2014</strong><br> Released jQuery.CoinTipper</p>
 
 				<div class="footer">
 					<p>CoinTipper by <a href="https://github.com/jeremymouton">@jeremymouton</a></p>
@@ -70,21 +77,28 @@
 	</div><!-- /main -->
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-	<script src="https://rawgithub.com/jeremymouton/cointipper/master/dist/cointipper.js"></script>
+	<script src="assets/js/cointipper.js"></script>
 
 	<script>
 		$(function() {
 			$('#donate-bitcoin').coinTipper({
-				type: 'btc', // btc, doge
+				type: 'btc',
 				name: 'CoinTipper',
 				address: '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5',
 				label: 'CoinTipper Tip Jar'
 			});
 
 			$('#donate-dogecoin').coinTipper({
-				type: 'doge', // btc, doge
+				type: 'doge',
 				name: 'CoinTipper',
 				address: 'DAxYkK3nGQPasscKYmbMswQJoV3h8y4aEW',
+				label: 'CoinTipper Tip Jar'
+			});
+
+			$('#donate-kittehcoin').coinTipper({
+				type: 'meow',
+				name: 'CoinTipper',
+				address: 'KTxtYiB28YV5pBgy5GRwdFqWDx9RERVRNv',
 				label: 'CoinTipper Tip Jar'
 			});
 		});

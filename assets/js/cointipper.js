@@ -1,5 +1,5 @@
 // ======================
-// CoinTipper jQuery plugin
+// jQuery.CoinTipper
 // 
 // Jeremy Mouton (@jeremymouton)
 // https://github.com/jeremymouton/
@@ -20,8 +20,8 @@
 			address: null,
 			label: null
 		}, options );
- 		
- 		button = generateDonationButton(options, this);
+		
+		button = generateDonationButton(options, this);
 		return button;
 	};
 }( jQuery ));
@@ -43,6 +43,11 @@ function generateDonationButton(options,btn) {
 		var currency_name = "Dogecoin",
 		    uri_key       = "dogecoin",
 		    iso           = "DOGE";
+
+	} else if (currency === "meow") {
+		var currency_name = "Kittehcoin",
+		    uri_key       = "kittehcoin",
+		    iso           = "MEOW";
 	}
 
 	// Assign and build HTML
@@ -85,9 +90,9 @@ function generateDonationPayment(currency, address, amount, label, uri_key, iso)
 
 	// Replace DOM with new values
 	$('.'+currency+'.modal input#donation-amount').val(amount);
-	$('.'+currency+'.modal .span-amount').html(amount + ' ' + iso);
+	$('.'+currency+'.modal .span-amount').html(amount + ' ' + iso).css('font-weight','bold');
 	$('.'+currency+'.modal .span-uri').attr('href',uri);
-	$('.'+currency+'.modal #qrcode').html('');
+	$('.'+currency+'.modal #qrcode').html('').wrap('<a href="'+uri+'"></a>');
 	$('.'+currency+'.modal #qrcode').qrcode({
 		width: 170,
 		height: 170,
@@ -107,14 +112,16 @@ function buildDonateModalHtml(currency, name, address, iso) {
 	// Set donation amounts
 	if (currency === "btc") {
 		var amounts = Array(0.0005, 0.001, 0.002, 0.003, 0.005);
-
 	} else if (currency === "doge") {
 		var amounts = Array(20, 50, 100, 500, 1000);
+	} else if (currency === "meow") {
+		var amounts = Array(200, 500, 1000, 5000, 10000);
+		iso = '<small>'+iso+'</small>'
 	}
 
 	// Generate modal html, using Bootstrap.
 	// Assign default donation values.
-	var html = '<div id="'+currency+'-donation-overlay" class="modal fade '+currency+'"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Donate to '+name+'</h4></div><div class="modal-body"><div class="well">Donate <input type="text" name="donation-amount" id="donation-amount" size="4" value=""> '+iso+' to <strong>'+name+'</strong>.</div><table class="donation-options"><td>Amount:</td><td><label class="radio inline"><input id="donation-option-1" name="donation-option" type="radio" value="'+amounts[0]+'">'+amounts[0]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-2" name="donation-option" type="radio" value="'+amounts[1]+'">'+amounts[1]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-3" name="donation-option" type="radio" value="'+amounts[2]+'">'+amounts[2]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-4" name="donation-option" type="radio" value="'+amounts[3]+'">'+amounts[3]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-5" name="donation-option" type="radio" value="'+amounts[4]+'">'+amounts[4]+' '+iso+'</label></td></table><table class="donation-payment"><td><div id="qrcode"><img src="http://placehold.it/170/ffffff/000000&text=select+amount" alt=""></div></td><td><p>Send exactly <span class="span-amount">selected amount</span> (plus miner fee) to: <code><a href="#" class="span-uri">'+address+'</a></code></p><p>Thank you for your support!</p></td></table></div><div class="modal-footer"><p class="powered-by">Powered by <a href="https://github.com/jeremymouton/cointipper" target="_blank">CoinTipper</a></p><button type="button" class="btn btn-primary" data-dismiss="modal">Done</button></div></div></div></div>';
+	var html = '<div id="'+currency+'-donation-overlay" class="modal fade '+currency+'"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Donate to '+name+'</h4></div><div class="modal-body"><div class="well">Donate <input type="text" name="donation-amount" id="donation-amount" size="4" value=""> '+iso+' to <strong>'+name+'</strong>.</div><table class="donation-options"><td>Amount:</td><td><label class="radio inline"><input id="donation-option-1" name="donation-option" type="radio" value="'+amounts[0]+'">'+amounts[0]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-2" name="donation-option" type="radio" value="'+amounts[1]+'">'+amounts[1]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-3" name="donation-option" type="radio" value="'+amounts[2]+'">'+amounts[2]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-4" name="donation-option" type="radio" value="'+amounts[3]+'">'+amounts[3]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-5" name="donation-option" type="radio" value="'+amounts[4]+'">'+amounts[4]+' '+iso+'</label></td></table><table class="donation-payment"><td><div id="qrcode"><img src="http://placehold.it/170/ffffff/999999&text=Select amount" alt=""></div></td><td><p>Send <span class="span-amount">selected amount</span> to: <code><a href="#" class="span-uri">'+address+'</a></code></p><br><p>Thank you for your support!</p></td></table></div><div class="modal-footer"><p class="powered-by">Powered by <a href="https://github.com/jeremymouton/cointipper" target="_blank">CoinTipper</a></p><button type="button" class="btn btn-primary" data-dismiss="modal">Done</button></div></div></div></div>';
 	return html;
 }
 
@@ -149,178 +156,178 @@ function buildDonateModalHtml(currency, name, address, iso) {
   // ======================
 
   var Modal = function (element, options) {
-    this.options   = options
-    this.$element  = $(element)
-    this.$backdrop =
-    this.isShown   = null
+	this.options   = options
+	this.$element  = $(element)
+	this.$backdrop =
+	this.isShown   = null
 
-    if (this.options.remote) {
-      this.$element
-        .find('.modal-content')
-        .load(this.options.remote, $.proxy(function () {
-          this.$element.trigger('loaded.bs.modal')
-        }, this))
-    }
+	if (this.options.remote) {
+	  this.$element
+		.find('.modal-content')
+		.load(this.options.remote, $.proxy(function () {
+		  this.$element.trigger('loaded.bs.modal')
+		}, this))
+	}
   }
 
   Modal.DEFAULTS = {
-    backdrop: true,
-    keyboard: true,
-    show: true
+	backdrop: true,
+	keyboard: true,
+	show: true
   }
 
   Modal.prototype.toggle = function (_relatedTarget) {
-    return this[!this.isShown ? 'show' : 'hide'](_relatedTarget)
+	return this[!this.isShown ? 'show' : 'hide'](_relatedTarget)
   }
 
   Modal.prototype.show = function (_relatedTarget) {
-    var that = this
-    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
+	var that = this
+	var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
 
-    this.$element.trigger(e)
+	this.$element.trigger(e)
 
-    if (this.isShown || e.isDefaultPrevented()) return
+	if (this.isShown || e.isDefaultPrevented()) return
 
-    this.isShown = true
+	this.isShown = true
 
-    this.escape()
+	this.escape()
 
-    this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+	this.$element.on('click.dismiss.bs.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
 
-    this.backdrop(function () {
-      var transition = $.support.transition && that.$element.hasClass('fade')
+	this.backdrop(function () {
+	  var transition = $.support.transition && that.$element.hasClass('fade')
 
-      if (!that.$element.parent().length) {
-        that.$element.appendTo(document.body) // don't move modals dom position
-      }
+	  if (!that.$element.parent().length) {
+		that.$element.appendTo(document.body) // don't move modals dom position
+	  }
 
-      that.$element
-        .show()
-        .scrollTop(0)
+	  that.$element
+		.show()
+		.scrollTop(0)
 
-      if (transition) {
-        that.$element[0].offsetWidth // force reflow
-      }
+	  if (transition) {
+		that.$element[0].offsetWidth // force reflow
+	  }
 
-      that.$element
-        .addClass('in')
-        .attr('aria-hidden', false)
+	  that.$element
+		.addClass('in')
+		.attr('aria-hidden', false)
 
-      that.enforceFocus()
+	  that.enforceFocus()
 
-      var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
+	  var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
 
-      transition ?
-        that.$element.find('.modal-dialog') // wait for modal to slide in
-          .one($.support.transition.end, function () {
-            that.$element.trigger('focus').trigger(e)
-          })
-          .emulateTransitionEnd(300) :
-        that.$element.trigger('focus').trigger(e)
-    })
+	  transition ?
+		that.$element.find('.modal-dialog') // wait for modal to slide in
+		  .one($.support.transition.end, function () {
+			that.$element.trigger('focus').trigger(e)
+		  })
+		  .emulateTransitionEnd(300) :
+		that.$element.trigger('focus').trigger(e)
+	})
   }
 
   Modal.prototype.hide = function (e) {
-    if (e) e.preventDefault()
+	if (e) e.preventDefault()
 
-    e = $.Event('hide.bs.modal')
+	e = $.Event('hide.bs.modal')
 
-    this.$element.trigger(e)
+	this.$element.trigger(e)
 
-    if (!this.isShown || e.isDefaultPrevented()) return
+	if (!this.isShown || e.isDefaultPrevented()) return
 
-    this.isShown = false
+	this.isShown = false
 
-    this.escape()
+	this.escape()
 
-    $(document).off('focusin.bs.modal')
+	$(document).off('focusin.bs.modal')
 
-    this.$element
-      .removeClass('in')
-      .attr('aria-hidden', true)
-      .off('click.dismiss.bs.modal')
+	this.$element
+	  .removeClass('in')
+	  .attr('aria-hidden', true)
+	  .off('click.dismiss.bs.modal')
 
-    $.support.transition && this.$element.hasClass('fade') ?
-      this.$element
-        .one($.support.transition.end, $.proxy(this.hideModal, this))
-        .emulateTransitionEnd(300) :
-      this.hideModal()
+	$.support.transition && this.$element.hasClass('fade') ?
+	  this.$element
+		.one($.support.transition.end, $.proxy(this.hideModal, this))
+		.emulateTransitionEnd(300) :
+	  this.hideModal()
   }
 
   Modal.prototype.enforceFocus = function () {
-    $(document)
-      .off('focusin.bs.modal') // guard against infinite focus loop
-      .on('focusin.bs.modal', $.proxy(function (e) {
-        if (this.$element[0] !== e.target && !this.$element.has(e.target).length) {
-          this.$element.trigger('focus')
-        }
-      }, this))
+	$(document)
+	  .off('focusin.bs.modal') // guard against infinite focus loop
+	  .on('focusin.bs.modal', $.proxy(function (e) {
+		if (this.$element[0] !== e.target && !this.$element.has(e.target).length) {
+		  this.$element.trigger('focus')
+		}
+	  }, this))
   }
 
   Modal.prototype.escape = function () {
-    if (this.isShown && this.options.keyboard) {
-      this.$element.on('keyup.dismiss.bs.modal', $.proxy(function (e) {
-        e.which == 27 && this.hide()
-      }, this))
-    } else if (!this.isShown) {
-      this.$element.off('keyup.dismiss.bs.modal')
-    }
+	if (this.isShown && this.options.keyboard) {
+	  this.$element.on('keyup.dismiss.bs.modal', $.proxy(function (e) {
+		e.which == 27 && this.hide()
+	  }, this))
+	} else if (!this.isShown) {
+	  this.$element.off('keyup.dismiss.bs.modal')
+	}
   }
 
   Modal.prototype.hideModal = function () {
-    var that = this
-    this.$element.hide()
-    this.backdrop(function () {
-      that.removeBackdrop()
-      that.$element.trigger('hidden.bs.modal')
-    })
+	var that = this
+	this.$element.hide()
+	this.backdrop(function () {
+	  that.removeBackdrop()
+	  that.$element.trigger('hidden.bs.modal')
+	})
   }
 
   Modal.prototype.removeBackdrop = function () {
-    this.$backdrop && this.$backdrop.remove()
-    this.$backdrop = null
+	this.$backdrop && this.$backdrop.remove()
+	this.$backdrop = null
   }
 
   Modal.prototype.backdrop = function (callback) {
-    var animate = this.$element.hasClass('fade') ? 'fade' : ''
+	var animate = this.$element.hasClass('fade') ? 'fade' : ''
 
-    if (this.isShown && this.options.backdrop) {
-      var doAnimate = $.support.transition && animate
+	if (this.isShown && this.options.backdrop) {
+	  var doAnimate = $.support.transition && animate
 
-      this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
-        .appendTo(document.body)
+	  this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
+		.appendTo(document.body)
 
-      this.$element.on('click.dismiss.bs.modal', $.proxy(function (e) {
-        if (e.target !== e.currentTarget) return
-        this.options.backdrop == 'static'
-          ? this.$element[0].focus.call(this.$element[0])
-          : this.hide.call(this)
-      }, this))
+	  this.$element.on('click.dismiss.bs.modal', $.proxy(function (e) {
+		if (e.target !== e.currentTarget) return
+		this.options.backdrop == 'static'
+		  ? this.$element[0].focus.call(this.$element[0])
+		  : this.hide.call(this)
+	  }, this))
 
-      if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
+	  if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
 
-      this.$backdrop.addClass('in')
+	  this.$backdrop.addClass('in')
 
-      if (!callback) return
+	  if (!callback) return
 
-      doAnimate ?
-        this.$backdrop
-          .one($.support.transition.end, callback)
-          .emulateTransitionEnd(150) :
-        callback()
+	  doAnimate ?
+		this.$backdrop
+		  .one($.support.transition.end, callback)
+		  .emulateTransitionEnd(150) :
+		callback()
 
-    } else if (!this.isShown && this.$backdrop) {
-      this.$backdrop.removeClass('in')
+	} else if (!this.isShown && this.$backdrop) {
+	  this.$backdrop.removeClass('in')
 
-      $.support.transition && this.$element.hasClass('fade') ?
-        this.$backdrop
-          .one($.support.transition.end, callback)
-          .emulateTransitionEnd(150) :
-        callback()
+	  $.support.transition && this.$element.hasClass('fade') ?
+		this.$backdrop
+		  .one($.support.transition.end, callback)
+		  .emulateTransitionEnd(150) :
+		callback()
 
-    } else if (callback) {
-      callback()
-    }
+	} else if (callback) {
+	  callback()
+	}
   }
 
 
@@ -330,15 +337,15 @@ function buildDonateModalHtml(currency, name, address, iso) {
   var old = $.fn.modal
 
   $.fn.modal = function (option, _relatedTarget) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.modal')
-      var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
+	return this.each(function () {
+	  var $this   = $(this)
+	  var data    = $this.data('bs.modal')
+	  var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-      if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
-      if (typeof option == 'string') data[option](_relatedTarget)
-      else if (options.show) data.show(_relatedTarget)
-    })
+	  if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
+	  if (typeof option == 'string') data[option](_relatedTarget)
+	  else if (options.show) data.show(_relatedTarget)
+	})
   }
 
   $.fn.modal.Constructor = Modal
@@ -348,8 +355,8 @@ function buildDonateModalHtml(currency, name, address, iso) {
   // =================
 
   $.fn.modal.noConflict = function () {
-    $.fn.modal = old
-    return this
+	$.fn.modal = old
+	return this
   }
 
 
@@ -357,23 +364,23 @@ function buildDonateModalHtml(currency, name, address, iso) {
   // ==============
 
   $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
-    var $this   = $(this)
-    var href    = $this.attr('href')
-    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) //strip for ie7
-    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
+	var $this   = $(this)
+	var href    = $this.attr('href')
+	var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) //strip for ie7
+	var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
 
-    if ($this.is('a')) e.preventDefault()
+	if ($this.is('a')) e.preventDefault()
 
-    $target
-      .modal(option, this)
-      .one('hide', function () {
-        $this.is(':visible') && $this.trigger('focus')
-      })
+	$target
+	  .modal(option, this)
+	  .one('hide', function () {
+		$this.is(':visible') && $this.trigger('focus')
+	  })
   })
 
   $(document)
-    .on('show.bs.modal', '.modal', function () { $(document.body).addClass('modal-open') })
-    .on('hidden.bs.modal', '.modal', function () { $(document.body).removeClass('modal-open') })
+	.on('show.bs.modal', '.modal', function () { $(document.body).addClass('modal-open') })
+	.on('hidden.bs.modal', '.modal', function () { $(document.body).removeClass('modal-open') })
 
 }(jQuery);
 

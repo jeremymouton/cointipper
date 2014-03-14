@@ -1,11 +1,37 @@
 /*! 
 // ======================
-// CoinTipper styles
+// jQuery.CoinTipper styles
 // 
 // Jeremy Mouton (@jeremymouton)
 // https://github.com/jeremymouton/
 // ======================
 */
+/* Button styles */
+/* You can make modifications below to change the look of the buttons*/
+a.donate-btn {
+  text-decoration: none;
+  color: #fff;
+  background-color: #428BCA;
+  border-color: #357EBD;
+  display: inline-block;
+  margin-bottom: 4px;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid rgba(0, 0, 0, 0);
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* CoinTipper styles */
+/* The code below is required to generate the modal */
+/* Only edit if you know what you're doing */
 [id*='-donation-overlay'] {
   /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 }
@@ -637,29 +663,8 @@ fieldset[disabled] [id*='-donation-overlay'] .btn.btn-primary.active {
     display: none !important;
   }
 }
-a.donate-btn {
-  text-decoration: none;
-  color: #fff;
-  background-color: #428BCA;
-  border-color: #357EBD;
-  display: inline-block;
-  margin-bottom: 0;
-  font-weight: normal;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  background-image: none;
-  border: 1px solid rgba(0, 0, 0, 0);
-  white-space: nowrap;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.428571429;
-  border-radius: 4px;
-  -webkit-user-select: none;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
 .modal-backdrop {
-  background: #bbb;
+  background: #000;
 }
 [id*='-donation-overlay'] button:focus,
 [id*='-donation-overlay'] a[data-toggle="modal"] {
@@ -687,7 +692,7 @@ a.donate-btn {
   float: left;
   font-size: 11px;
   position: relative;
-  top: 7px;
+  top: 20px;
 }
 [id*='-donation-overlay'] .powered-by a {
   color: inherit;
@@ -752,6 +757,9 @@ a.donate-btn {
     padding: 0;
     text-align: center;
     display: block;
+  }
+  [id*='-donation-overlay'] table.donation-options td label small {
+    font-size: inherit;
   }
   [id*='-donation-overlay'] table.donation-options td input[type=radio] {
     display: none;

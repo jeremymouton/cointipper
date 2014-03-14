@@ -3,11 +3,17 @@
   background-color: #F7F7F9;
   border: 1px solid #E1E1E8;
 }
+.main h1 {
+  font-family: monospace;
+}
+.main h1 small {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 .main .donate-btn a {
   color: #fff;
 }
 .main a {
-  color: #666;
+  color: #333;
 }
 .footer {
   clear: both;
@@ -18,4 +24,9 @@
 .footer a {
   color: #bbb;
   text-decoration: none;
+}
+@media (max-width: 767px) {
+  .main h1 {
+    font-size: 23px;
+  }
 }

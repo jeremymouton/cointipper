@@ -1,24 +1,14 @@
 /*! 
 // ======================
-// CoinTipper styles
+// jQuery.CoinTipper styles
 // 
 // Jeremy Mouton (@jeremymouton)
 // https://github.com/jeremymouton/
 // ======================
 */
 
-@import "bootstrap/normalize.less";
-@import "bootstrap/component-animations.less";
-@import "bootstrap/variables.less";
-@import "bootstrap/mixins.less";
-@import "bootstrap/scaffolding.less";
-@import "bootstrap/code.less";
-@import "bootstrap/forms.less";
-@import "bootstrap/buttons.less";
-@import "bootstrap/wells.less";
-@import "bootstrap/close.less";
-@import "bootstrap/modals.less";
-@import "bootstrap/responsive-utilities.less";
+/* Button styles */
+/* You can make modifications below to change the look of the buttons*/
 
 a.donate-btn {
 	text-decoration: none;
@@ -26,7 +16,7 @@ a.donate-btn {
 	background-color: #428BCA;
 	border-color: #357EBD;
 	display: inline-block;
-	margin-bottom: 0;
+	margin-bottom: 4px;
 	font-weight: normal;
 	text-align: center;
 	vertical-align: middle;
@@ -42,8 +32,25 @@ a.donate-btn {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+/* CoinTipper styles */
+/* The code below is required to generate the modal */
+/* Only edit if you know what you're doing */
+
+@import "bootstrap/normalize.less";
+@import "bootstrap/component-animations.less";
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+@import "bootstrap/scaffolding.less";
+@import "bootstrap/code.less";
+@import "bootstrap/forms.less";
+@import "bootstrap/buttons.less";
+@import "bootstrap/wells.less";
+@import "bootstrap/close.less";
+@import "bootstrap/modals.less";
+@import "bootstrap/responsive-utilities.less";
+
 .modal-backdrop {
-	background: #bbb;
+	background: #000;
 }
 
 [id*='-donation-overlay'] button:focus,
@@ -76,7 +83,7 @@ a.donate-btn {
 		float: left;
 		font-size: 11px;
 		position: relative;
-		top: 7px;
+		top: 20px;
 
 		a {
 			color: inherit;
@@ -152,6 +159,10 @@ a.donate-btn {
 					padding: 0;
 					text-align: center;
 					display: block;
+
+					small {
+						font-size: inherit;
+					}
 				}
 
 				input[type=radio] {
