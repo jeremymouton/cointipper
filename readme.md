@@ -1,7 +1,7 @@
 # CoinTipper
 
-Tipping modal similar to Coinbase. 
+Donation modal similar to Coinbase. 
 
-Works with Bitcoin and Dogecoin.
+Works with Bitcoin, Dogecoin and Kittehcoin.
 
-[DEMO](http://jeremymouton.com/cointipper/)
+[DEMO](jeremymouton.github.io/cointipper/)
