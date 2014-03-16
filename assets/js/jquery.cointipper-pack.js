@@ -5,9 +5,10 @@
 // https://github.com/jeremymouton/
 // 
 // Dependencies:
-//   - jquery
-//   - Bootstrap modal
-//   - jquery-qrcode
+//   - jquery.js
+//   - bootstrap-modal.js
+//   - jquery-qrcode.js
+//     - qrcode.js
 // 
 // ======================
 
@@ -16,7 +17,8 @@
 	$.fn.coinTipper = function(options) {
 		var settings = $.extend({
 			type: null,
-			name: null,
+			currency: null,
+			iso: null,
 			address: null,
 			label: null
 		}, options );
@@ -28,31 +30,16 @@
 
 function generateDonationButton(options,btn) {
 	// Get the options passed to .coinTipper()
-	var currency = options.type,
-	    name     = options.name,
+	var type     = options.type,
+	    currency = options.currency,
+	    iso      = options.iso,
 	    address  = options.address,
 	    label    = options.label;
 
-	// Set currency defaults
-	if (currency === "btc") {
-		var currency_name = "Bitcoin",
-		    uri_key       = "bitcoin",
-		    iso           = "BTC";
-
-	} else if (currency === "doge") {
-		var currency_name = "Dogecoin",
-		    uri_key       = "dogecoin",
-		    iso           = "DOGE";
-
-	} else if (currency === "meow") {
-		var currency_name = "Kittehcoin",
-		    uri_key       = "kittehcoin",
-		    iso           = "MEOW";
-	}
-
 	// Assign and build HTML
-	var modal   = buildDonateModalHtml(currency, name, address, iso);
-	var btnHtml = buildDonateButtonHtml(currency, currency_name);
+
+	var modal   = buildDonateModalHtml(type, currency, iso, address, label);
+	var btnHtml = buildDonateButtonHtml(type, currency);
 
 	$(btn).replaceWith(btnHtml);
 	$('body').append(modal);
@@ -63,29 +50,30 @@ function generateDonationButton(options,btn) {
 	// Watch radio buttons
 	$('.'+currency+'.modal input[name="donation-option"]').bind('change', function() {
 		var amount = $(this).attr('value');
-		generateDonationPayment(currency, address, amount, label, uri_key, iso);
+		generateDonationPayment(currency, address, amount, label, iso);
 	});
 
 	// Watch donation input field
 	$('.'+currency+'.modal input[name="donation-amount"]').keyup( function() {
 		var amount = $(this).val();
 		$('.'+currency+'.modal input[name="donation-option"]').prop('checked', false);
-		generateDonationPayment(currency, address, amount, label, uri_key, iso);
+		generateDonationPayment(currency, address, amount, label, iso);
 	});
 }
 
-function generateDonationPayment(currency, address, amount, label, uri_key, iso) {
+function generateDonationPayment(currency, address, amount, label, iso) {
 	// Update DOM values, donation URI, and generate QR code.
 
 	var uri;
+	// Clean the Label and Name inputs
+	label = label.replace(/\s+/g, '+');
 
 	// Label specified? 
 	if (label === undefined) {
-		uri = uri_key+":"+address+"?amount="+amount;
+		uri = currency+":"+address+"?amount="+amount;
 
 	} else {
-		label = label.replace(/[ ]/g,"+");
-		uri = uri_key+":"+address+"?amount="+amount+"&label="+label;
+		uri = currency+":"+address+"?amount="+amount+"&label="+label;
 	}
 
 	// Replace DOM with new values
@@ -100,28 +88,45 @@ function generateDonationPayment(currency, address, amount, label, uri_key, iso)
 	});
 }
 
-function buildDonateButtonHtml(currency, currency_name) {
+function buildDonateButtonHtml(type, currency) {
 	// Build out the donation button
-	var html = '<a href="" data-toggle="modal" data-target="#'+currency+'-donation-overlay" class="donate-btn '+currency+'">Donate '+currency_name+'</a>';
+	var html = '<a href="" data-toggle="modal" data-target="#'+currency+'-donation-overlay" class="donate-btn '+currency+'">'+type+' '+currency+'</a>';
 	return html;
 }
 
-function buildDonateModalHtml(currency, name, address, iso) {
+function buildDonateModalHtml(type, currency, iso, address, label) {
 	// Set the donation amounts for each currency and generate the modal.
 
+	var html;
+	var show_options = true;
+
+	type = type.charAt(0).toUpperCase() + type.slice(1);
+
 	// Set donation amounts
-	if (currency === "btc") {
+	if (currency === "bitcoin") {
 		var amounts = Array(0.0005, 0.001, 0.002, 0.003, 0.005);
-	} else if (currency === "doge") {
+	} else if (currency === "dogecoin") {
 		var amounts = Array(20, 50, 100, 500, 1000);
-	} else if (currency === "meow") {
+	} else if (currency === "kittehcoin") {
 		var amounts = Array(200, 500, 1000, 5000, 10000);
 		iso = '<small>'+iso+'</small>'
+	} else {
+		// Empty array and hide amount option for new coins
+		var amounts = Array(0,0,0,0,0);
+			show_options = false;
 	}
 
 	// Generate modal html, using Bootstrap.
-	// Assign default donation values.
-	var html = '<div id="'+currency+'-donation-overlay" class="modal fade '+currency+'"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Donate to '+name+'</h4></div><div class="modal-body"><div class="well">Donate <input type="text" name="donation-amount" id="donation-amount" size="4" value=""> '+iso+' to <strong>'+name+'</strong>.</div><table class="donation-options"><td>Amount:</td><td><label class="radio inline"><input id="donation-option-1" name="donation-option" type="radio" value="'+amounts[0]+'">'+amounts[0]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-2" name="donation-option" type="radio" value="'+amounts[1]+'">'+amounts[1]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-3" name="donation-option" type="radio" value="'+amounts[2]+'">'+amounts[2]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-4" name="donation-option" type="radio" value="'+amounts[3]+'">'+amounts[3]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-5" name="donation-option" type="radio" value="'+amounts[4]+'">'+amounts[4]+' '+iso+'</label></td></table><table class="donation-payment"><td><div id="qrcode"><img src="http://placehold.it/170/ffffff/999999&text=Select amount" alt=""></div></td><td><p>Send <span class="span-amount">selected amount</span> to: <code><a href="#" class="span-uri">'+address+'</a></code></p><br><p>Thank you for your support!</p></td></table></div><div class="modal-footer"><p class="powered-by">Powered by <a href="https://github.com/jeremymouton/cointipper" target="_blank">CoinTipper</a></p><button type="button" class="btn btn-primary" data-dismiss="modal">Done</button></div></div></div></div>';
+	// Assign default donation values to supported coins.
+	// Hide prefilled options for unsupported coins.
+	if (show_options === true) {
+		console.log('btc/doge/meow');
+		html = '<div id="'+currency+'-donation-overlay" class="modal fade '+currency+'"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">'+type+' to '+label+'</h4></div><div class="modal-body"><div class="well">'+type+' <input type="text" name="donation-amount" id="donation-amount" size="4" value="" placeholder="'+amounts[0]+'"> '+iso+' to <strong>'+label+'</strong>.</div><table class="donation-options"><td>Amount:</td><td><label class="radio inline"><input id="donation-option-1" name="donation-option" type="radio" value="'+amounts[0]+'">'+amounts[0]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-2" name="donation-option" type="radio" value="'+amounts[1]+'">'+amounts[1]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-3" name="donation-option" type="radio" value="'+amounts[2]+'">'+amounts[2]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-4" name="donation-option" type="radio" value="'+amounts[3]+'">'+amounts[3]+' '+iso+'</label></td><td><label class="radio inline"><input id="donation-option-5" name="donation-option" type="radio" value="'+amounts[4]+'">'+amounts[4]+' '+iso+'</label></td></table><table class="donation-payment"><td><div id="qrcode"><img src="http://placehold.it/170/ffffff/999999&text=Select amount" alt=""></div></td><td><p>Send <span class="span-amount">selected amount</span> to: <code><a href="'+currency+':'+address+'?label='+label+'" class="span-uri">'+address+'</a></code></p><br><p>Thank you for your support!</p></td></table></div><div class="modal-footer"><p class="powered-by">Powered by <a href="https://github.com/jeremymouton/cointipper" target="_blank">CoinTipper</a></p><a href="'+currency+':'+address+'?label='+label+'" class="span-uri btn btn-primary">Send with Wallet</a><a class="btn btn-default" data-dismiss="modal">Done</a></div></div></div></div>';
+	} else {
+		console.log('other');
+		html = '<div id="'+currency+'-donation-overlay" class="modal fade '+currency+'"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">'+type+' to '+label+'</h4></div><div class="modal-body"><div class="well">'+type+' <input type="text" name="donation-amount" id="donation-amount" size="4" value=""> '+iso+' to <strong>'+label+'</strong>.</div><table class="donation-payment"><td><div id="qrcode"><img src="http://placehold.it/170/ffffff/999999&text=Select amount" alt=""></div></td><td><p>Send <span class="span-amount">selected amount</span> to: <code><a href="'+currency+':'+address+'?label='+label+'" class="span-uri">'+address+'</a></code></p><br><p>Thank you for your support!</p></td></table></div><div class="modal-footer"><p class="powered-by">Powered by <a href="https://github.com/jeremymouton/cointipper" target="_blank">CoinTipper</a></p><a href="'+currency+':'+address+'?label='+label+'" class="span-uri btn btn-primary">Send with Wallet</a><a class="btn btn-default" data-dismiss="modal">Done</a></div></div></div></div>';
+	}
+	
 	return html;
 }
 

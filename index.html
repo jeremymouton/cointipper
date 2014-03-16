@@ -10,8 +10,8 @@
 	<title>CoinTipper</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/styles.css">
-	<link rel="stylesheet" href="assets/css/cointipper.css">
+	<link rel="stylesheet" href="https://rawgithub.com/jeremymouton/cointipper/master/assets/css/styles.css">
+	<link rel="stylesheet" href="https://rawgithub.com/jeremymouton/cointipper/master/dist/cointipper.min.css">
 </head>
 <body>
 	<div class="container main">
@@ -26,6 +26,7 @@
 					<span id="donate-bitcoin" class="donate-btn"></span>
 					<span id="donate-dogecoin" class="donate-btn"></span>
 					<span id="donate-kittehcoin" class="donate-btn"></span>
+					<span id="donate-mycoin" class="donate-btn"></span>
 				</p>
 
 				<hr>
@@ -44,28 +45,31 @@
 
 				<hr>
 
-				<p>Select your target (<code>#donate-bitcoin</code> in the previous example), call <code>.coinTipper()</code> and pass in your options.</p>
+				<p>Select your target (<code>#donate-bitcoin</code> in the previous example), call <code>.coinTipper()</code> and give it some options.</p>
 <pre>
 &lt;script>
-    $(function() {
-        $('#donate-bitcoin').coinTipper({
-            type:    'btc', // btc, doge, meow
-            name:    'Name', // i.e CoinTipper
-            address: 'Your Donation Address',
-            label:   'A label for the Address' // optional
-        });
+  $(function() {
+    $('#donate-bitcoin').coinTipper({
+      type: 'tip', // tip, donate
+      currency: 'bitcoin',
+      iso: 'BTC',
+      address: '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5',
+      label: 'CoinTipper Tip Jar'
     });
+  });
 &lt;/script>
 </pre>
 				</p>
 
 				<hr>
 
-				<p>Currently supports <strong>BTC</strong>, <strong>DOGE</strong> and <strong><a href="https://github.com/jeremymouton/now-to-meow">MEOW</a></strong> addresses.</p>
+				<p>Supports any coin, just provide the name and its 3-4 letter ISO along with an address.</p>
 
 				<hr>
 
 				<h3>Log</h3>
+				<p><strong>March 16</strong><br> Added support for any coin. Simply removes prefilled radio buttons if currency is not recognized. <br>Added ability to control the button text.</p>
+				<p><strong>March 15</strong><br> Setup <a href="https://github.com/jeremymouton/cointipper-server">hosted version of the plugin</a> with some simplification.</p>
 				<p><strong>March 13, 2014</strong><br> Added MEOW support, edited modal text, linked QR code.</p>
 				<p><strong>March 12, 2014</strong><br> Released jQuery.CoinTipper</p>
 
@@ -77,28 +81,39 @@
 	</div><!-- /main -->
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-	<script src="assets/js/cointipper.js"></script>
+	<script src="//rawgithub.com/jeremymouton/cointipper/master/dist/jquery.cointipper-pack.min.js"></script>
 
 	<script>
 		$(function() {
 			$('#donate-bitcoin').coinTipper({
-				type: 'btc',
-				name: 'CoinTipper',
+				type: 'tip',
+				currency: 'bitcoin',
+				iso: 'BTC',
 				address: '1G967MwCf6XsMufpot3wHzbYnU3d2RevD5',
 				label: 'CoinTipper Tip Jar'
 			});
 
 			$('#donate-dogecoin').coinTipper({
-				type: 'doge',
-				name: 'CoinTipper',
+				type: 'tip',
+				currency: 'dogecoin',
+				iso: 'DOGE',
 				address: 'DAxYkK3nGQPasscKYmbMswQJoV3h8y4aEW',
 				label: 'CoinTipper Tip Jar'
 			});
 
 			$('#donate-kittehcoin').coinTipper({
-				type: 'meow',
-				name: 'CoinTipper',
+				type: 'donate',
+				currency: 'kittehcoin',
+				iso: 'MEOW',
 				address: 'KTxtYiB28YV5pBgy5GRwdFqWDx9RERVRNv',
+				label: 'CoinTipper Tip Jar'
+			});
+
+			$('#donate-mycoin').coinTipper({
+				type: 'donate',
+				currency: 'mycoin',
+				iso: 'MYC',
+				address: 'MYCRwdFqWiB28YV5pBgyRE09NGRwdFqWDxv',
 				label: 'CoinTipper Tip Jar'
 			});
 		});
