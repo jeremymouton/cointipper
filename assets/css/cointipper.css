@@ -9,6 +9,7 @@
 /* Button styles */
 /* You can make modifications below to change the look of the buttons*/
 a.donate-btn {
+  text-transform: capitalize;
   text-decoration: none;
   color: #fff;
   background-color: #428BCA;
@@ -32,16 +33,13 @@ a.donate-btn {
 /* CoinTipper styles */
 /* The code below is required to generate the modal */
 /* Only edit if you know what you're doing */
-[id*='-donation-overlay'] {
-  /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+
+[id*='-donation-overlay'] .donation-payment p {
+  font-size: 14px;
 }
-[id*='-donation-overlay'] html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-[id*='-donation-overlay'] body {
-  margin: 0;
+[id*='-donation-overlay'] .donation-payment code {
+  margin-top: 4px;
+  display: block;
 }
 [id*='-donation-overlay'] article,
 [id*='-donation-overlay'] aside,
@@ -297,7 +295,7 @@ a.donate-btn {
 [id*='-donation-overlay'] .radio,
 [id*='-donation-overlay'] .checkbox {
   display: block;
-  min-height: 20px;
+  min-height: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
   padding-left: 20px;
@@ -351,13 +349,7 @@ fieldset[disabled] [id*='-donation-overlay'] .checkbox-inline {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-[id*='-donation-overlay'] .btn:focus,
-[id*='-donation-overlay'] .btn:active:focus,
-[id*='-donation-overlay'] .btn.active:focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
+  text-decoration: none !important;
 }
 [id*='-donation-overlay'] .btn.btn-primary {
   color: #ffffff;
@@ -743,7 +735,7 @@ fieldset[disabled] [id*='-donation-overlay'] .btn.btn-primary.active {
 }
 [id*='-donation-overlay'] table.donation-options td input[type=radio] {
   position: relative;
-  top: -2px;
+  top: -3px;
 }
 @media (max-width: 767px) {
   [id*='-donation-overlay'] table.donation-options td {
