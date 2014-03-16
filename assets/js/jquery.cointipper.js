@@ -36,6 +36,9 @@ function generateDonationButton(options,btn) {
 	    address  = options.address,
 	    label    = options.label;
 
+	// Clean the Label input
+	label = label.replace(/\s+/g, '+');
+
 	// Assign and build HTML
 
 	var modal   = buildDonateModalHtml(type, currency, iso, address, label);
@@ -65,8 +68,6 @@ function generateDonationPayment(currency, address, amount, label, iso) {
 	// Update DOM values, donation URI, and generate QR code.
 
 	var uri;
-	// Clean the Label and Name inputs
-	label = label.replace(/\s+/g, '+');
 
 	// Label specified? 
 	if (label === undefined) {
