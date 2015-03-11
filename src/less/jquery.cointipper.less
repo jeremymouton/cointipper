@@ -14,9 +14,11 @@
 // COMPONENTS
 
 // Bootstrap
-@import "@{bower_components}/bootstrap/less/variables.less";
-@import "@{bower_components}/bootstrap/less/mixins.less";
-// @import "@{bower_components}/bootstrap/less/modals.less";
+@import (reference) "@{bower_components}/bootstrap/less/variables.less";
+@import (reference) "@{bower_components}/bootstrap/less/mixins.less";
+// @import (reference) "@{bower_components}/bootstrap/less/modals.less";
+
+@import (reference) "@{bower_components}/bootstrap/less/forms.less";
 
 // ======================
 // MAIN STYLES
@@ -50,6 +52,18 @@ a.donate-btn {
 /* CoinTipper styles */
 /* The code below is required to generate the modal */
 /* Only edit if you know what you're doing */
+
+[id*='-donation-overlay'] {
+	.donation-payment input[type=text] {
+		&:extend(.form-control);
+		width: 100%;
+
+		-moz-box-sizing: border-box; 
+		-webkit-box-sizing: border-box; 
+		box-sizing: border-box;
+		cursor: default;
+	}
+}
 
 [id*='-donation-overlay'] .donation-payment p {
 	font-size: 14px;
@@ -779,8 +793,19 @@ fieldset[disabled] [id*='-donation-overlay'] .btn.btn-primary.active {
 		padding: 0;
 	}
 }
-[id*='-donation-overlay'] table.donation-payment tr {
-	height: 195px;
+[id*='-donation-overlay'] {
+	table.donation-payment {
+		width: auto;
+		margin: 0 auto;
+
+		tr {
+			height: 195px;
+		}
+
+		td:last-child {
+			width: 99%;
+		}
+	}
 }
 @media (max-width: 767px) {
 	[id*='-donation-overlay'] table.donation-payment td {
