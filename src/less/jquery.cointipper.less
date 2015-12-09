@@ -816,8 +816,16 @@ fieldset[disabled] [id*='-donation-overlay'] .btn.btn-primary.active {
 }
 [id*='-donation-overlay'] #qrcode {
 	margin-right: 10px;
+	height: 190px;
+	width: 190px;
+	position: relative;
+	text-align: center;
 }
-[id*='-donation-overlay'] #qrcode img,
-[id*='-donation-overlay'] #qrcode canvas {
-	padding: 10px;
+
+[id*='-donation-overlay'] .qrcode-placeholder {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	text-transform: uppercase;
+	font-weight: bold;
 }
