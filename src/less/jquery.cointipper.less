@@ -16,6 +16,8 @@
 // Bootstrap
 @import (reference) "@{bower_components}/bootstrap/less/variables.less";
 @import (reference) "@{bower_components}/bootstrap/less/mixins.less";
+// @import (reference) "@{bower_components}/bootstrap/less/modals.less";
+
 @import (reference) "@{bower_components}/bootstrap/less/forms.less";
 
 // ======================
@@ -238,12 +240,12 @@ a.donate-btn {
 [id*='-donation-overlay'] th {
 	padding: 0;
 }
-.fade {
+[id*='-donation-overlay'].fade {
 	opacity: 0;
 	-webkit-transition: opacity 0.15s linear;
 	transition: opacity 0.15s linear;
 }
-.fade.in {
+[id*='-donation-overlay'].fade.in {
 	opacity: 1;
 }
 [id*='-donation-overlay'] hr {
