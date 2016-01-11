@@ -100,6 +100,8 @@ function buildDonateModalHtml(type, currency, iso, address, label, name) {
 	} else if (currency === "kittehcoin") {
 		amounts = Array(200, 500, 1000, 5000, 10000);
 		iso = '<small>'+iso+'</small>';
+	} else if (currency === "gamecredits") {
+		amounts = Array(0.0001, 0.001, 0.002, 0.003, 0.005);	
 	} else {
 		// Empty array and hide amount option for new coins
 		amounts = Array(0,0,0,0,0);

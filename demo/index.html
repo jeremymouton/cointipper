@@ -29,6 +29,7 @@
 					<span id="donate-dogecoin" class="donate-btn"></span>
 					<span id="donate-kittehcoin" class="donate-btn"></span>
 					<span id="donate-mycoin" class="donate-btn"></span>
+					<span id="donate-gamecredits" class="donate-btn"></span>
 				</div>
  
 				<br>
@@ -41,7 +42,7 @@
  
 					<p>The hosted version let's you use an embed code for easier integration.</p>
  
-					<embed src="https://cointipper.herokuapp.com/tip/bitcoin/BTC/1GMwCf6XsMufpot3wHzbYnU3d2RevD5/CoinTipper-Donation-Jar" height="38" width="150"> <embed src="https://cointipper.herokuapp.com/donate/dogecoin/DOGE/DAxYkK3nGQPasscKYmbMswQJoV3h8y4aEW/CoinTipper-Donation-Jar" height="38" width="150"> <embed src="https://cointipper.herokuapp.com/donate/kittehcoin/MEOW/KTxtYiB28YV5pBgy5GRwdFqWDx9RERVRNv/CoinTipper" height="38" width="150">
+					<embed src="https://cointipper.herokuapp.com/tip/bitcoin/BTC/1GMwCf6XsMufpot3wHzbYnU3d2RevD5/CoinTipper-Donation-Jar" height="38" width="150"> <embed src="https://cointipper.herokuapp.com/donate/dogecoin/DOGE/DAxYkK3nGQPasscKYmbMswQJoV3h8y4aEW/CoinTipper-Donation-Jar" height="38" width="150"> <embed src="https://cointipper.herokuapp.com/donate/gamecredits/GMC/GfaKqR2kuv1ChvDkpPtxUuAct7q1keafQv/CoinTipper" height="38" width="150"> <embed src="https://cointipper.herokuapp.com/donate/kittehcoin/MEOW/KTxtYiB28YV5pBgy5GRwdFqWDx9RERVRNv/CoinTipper" height="38" width="150">
 
 						<br>
 						<br>
@@ -131,6 +132,14 @@ cointipper.herokuapp.com then /type/currency/ISO/address/label-with-spaces
 				currency: 'kittehcoin',
 				iso: 'MEOW',
 				address: 'KTxtYiB28YV5pBgy5GRwdFqWDx9RERVRNv',
+				label: 'CoinTipper Tip Jar'
+			});
+			
+			$('#donate-gamecrdits').coinTipper({
+				type: 'donate',
+				currency: 'gamecredits',
+				iso: 'GMC',
+				address: 'GfaKqR2kuv1ChvDkpPtxUuAct7q1keafQv',
 				label: 'CoinTipper Tip Jar'
 			});
 
